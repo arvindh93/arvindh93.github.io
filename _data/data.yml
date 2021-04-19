@@ -14,8 +14,8 @@ sidebar:
     # Sidebar links
     email: aravindseshadree93@gmail.com
     phone: +919952677170
-    website: bbrattoli.github.io/publications/ #do not add http://
-    linkedin: www.linkedin.com/in/aravind-seshadri-4b44a379/
+    website: #do not add http://
+    linkedin: aravind-seshadri-4b44a379
     github: arvindh93
     gitlab:
     bitbucket:
@@ -34,12 +34,84 @@ sidebar:
 career-profile:
     title: Profile
     summary: |
-      Energetic software developer with 7 years experience as backend developer in agile SDLC.
-      Ardent follower of TDD to craft and test the business logic.
-      Experienced under scrum framework and jumped in as scrum master twice to drive 5 member cross functional team.
-      Responsible for driving many potential in-house projects.
-      Experienced in mentoring and training new employees to catch up with product development.
+      - Energetic software developer with 7 years experience as backend developer in agile SDLC.
+      - Ardent follower of TDD to craft and test the business logic.
+      - Experienced under scrum framework and jumped in as scrum master twice to drive 5 member cross functional team.
+      - Responsible for driving many potential in-house projects.
+      - Experienced in mentoring and training new employees to catch up with product development.
 
+
+experiences:
+    - role: Senior Software Engineer
+      time: Apr 2020 - Present
+      company: Xome, Chennai
+      details: |
+        - Contract generator
+          - Tech stack - PostgreSQL, Asycio, Aiohttp, pdftk
+          - Contribution - added logic to auto-generate auction sold contracts (legal documents for selling asset) by populating user details and auction details in document (pdf). This avoids manual generation of documents and speeden the entire handover process by 70% post auctions.
+          - Implemented asynchronous task processing (asyncio) to efficiently handle IO bound tasks in document generation. 
+
+        - Auction scheduler
+          - Tech stack - PostgreSQL, Flask, Celery, RabbitMQ, Ember, Pytest
+          - Contribution - Enhanced scheduling logic by auto-assigning assets based on auctioneer preference reducing their manual effort by 60%
+          - Implemented observer pattern (using Celery and RabbitMQ) to handle deferred logic of auto-assigning the assets based on preferences set by the auctioneer. 
+
+        - User Management
+          - Tech stack - PostgreSQL, Flask, Pytest, Ember
+          - Contribution - Implemented admin user management with role based ACL to restrict admin actions  in in-house auction controlling portal.
+          - Implemented both presentational logic (in ember) and backend logic (in flask) to restrict admin actions.
+
+
+    - role: Senior Software Developer
+      time: 2017 - 2020
+      company: ZoomRX, Chennai
+      details: |
+        - Rule Engine Enhancement
+          - Tech stack - MySQL, CakePHP, Mythril, PHPUnit
+          - Contribution - Enhanced existing business logic to reduce data collection costs by 40%. This engine will be primarily used to tailor the flow in which data should be collected from physicians.
+          - Implemented strategy pattern to extend new business logic along with existing one and chain-of-responsibility pattern to execute business logic. Responsible for the entire product release which contributes the major part in the company's revenue.
+        - Qual Audio Transcription
+          - Tech stack - MySQL, CakePHP, Google Speech API,  AWS S3, Sox convertor,  Ember JS
+          - Contribution - Implemented backend logic to capture meeting audio between physicians and business analyst, convert audio formats using Sox convertor,  transcribe the audio using Google Speech API and  store it as text in AWS S3.
+          - Implemented Adapter pattern in connecting backend logic with external services to make it more pluggable. Responsible for the entire product cycle and worked closely with stakeholders to make it more user friendly.
+        - Integrating Zoho CRM
+          - Tech stack - CakePHP, ZohoCRM API, EmberJS
+          - Contribution - Implemented backend logic using CakePHP to fetch eligible module details from Zoho CRM using Zoho CRM REST APIs. 
+          - Implemented Adapter pattern to connect with Zoho CRM APIs using OAuth 2.0. Faced challenge on creating and maintaining auth tokens while interacting with Zoho CRM API.
+
+
+    - role: Software Developer
+      time: 2014 - 2017
+      company: ZoomRX, Chennai
+      details: |
+        - In-house management portal enhancement
+          - Tech stack - MySQL, CakePHP, EmberJS
+          - Contribution - Structured API endpoints for server-client communication based on  REST architecture. Implemented JSONAPI as payload specification. Migrated backend logic from legacy 2-tier to 3-tier architecture thereby decoupling presentational logic from business logic.
+        - LDAP authentication
+          - Tech stack - LDAP, CakePHP
+          - Contribution - Implemented LDAP authentication using Strategy pattern and created LDAP authentication as pluggable cakephp plugin. This plugin is shared by all in-house applications to authenticate business team against single central LDAP datastore.  
+        - Analytics portal
+          - Tech stack - MySQL, CakePHP, Javascript, HTML, CSS
+          - Contribution - Responsible for creating an in-house analytics portal for business team to monitor daily data using javascript based D3 charts and highcharts.
+
+education:
+    - degree: Bachelor of Engineering
+      university: College of Engineering, Guindy
+      time: 2010 - 2014
+      details: |
+        CGPA: 8.47
+      
+    - degree: Higher Secondary
+      university: Kurinji Higher Secondary School, Namakkal
+      time: 2010
+      details: |
+        Percent: 98%
+     
+    - degree: Secondary School Leaving Certificate
+      university: Vikas Vidyalaya Matric Higher Secondary School, Tirupur
+      time: 2008
+      details: |
+        Percent: 92%
 
 skills:
     title: Skills &amp; Proficiency
@@ -62,72 +134,3 @@ skills:
 
       - name: NodeJS | MongoDB | Mocha
         level: 540%
-
-experiences:
-    - role: Senior Software Engineer
-      time: Apr 2020 - Present
-      company: Xome, Chennai
-      details: |
-        - Contract generator
-          Tech stack - PostgreSQL, Asycio, Aiohttp, pdftk
-          Contribution - added logic to auto-generate auction sold contracts (legal documents for selling asset) by populating user details and auction details in document (pdf). This avoids manual generation of documents and speeden the entire handover process by 70% post auctions.
-          Implemented asynchronous task processing (asyncio) to efficiently handle IO bound tasks in document generation. 
-
-        - Auction scheduler
-          Tech stack - PostgreSQL, Flask, Celery, RabbitMQ, Ember, Pytest
-          Contribution - Enhanced scheduling logic by auto-assigning assets based on auctioneer preference reducing their manual effort by 60%
-          Implemented observer pattern (using Celery and RabbitMQ) to handle deferred logic of auto-assigning the assets based on preferences set by the auctioneer. 
-
-        - User Management
-          - Tech stack - PostgreSQL, Flask, Pytest, Ember
-          - Contribution - Implemented admin user management with role based ACL to restrict admin actions  in in-house auction controlling portal.
-          - Implemented both presentational logic (in ember) and backend logic (in flask) to restrict admin actions.
-
-
-    - role: Senior Software Engineer
-      time: 2014 - 2015
-      company: Google, London
-      details: |
-        Describe your role here lorem ipsum dolor sit amet, consectetuer
-        adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa.
-        Cum sociis natoque penatibus et magnis dis parturient montes,
-        nascetur ridiculus mus. Donec quam felis, ultricies nec,
-        pellentesque eu, pretium quis, sem.
-
-          - Bullet point
-          - Bullet point
-
-    - role: UI Developer
-      time: 2012 - 2014
-      company: Amazon, London
-      details: |
-        Describe your role here lorem ipsum dolor sit amet, consectetuer
-        adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa.
-        Cum sociis natoque penatibus et magnis dis parturient montes,
-        nascetur ridiculus mus. Donec quam felis, ultricies nec,
-        pellentesque eu, pretium quis, sem.
-
-          - Bullet point
-          - Bullet point
-
-education:
-    - degree: Bachelor of Engineering
-      university: College of Engineering, Guindy
-      time: 2010 - 2014
-      details: |
-        CGPA: 8.47
-      
-    - degree: Higher Secondary
-      university: Kurinji Higher Secondary School, Namakkal
-      time: 2010
-      details: |
-        Percent: 98%
-     
-    - degree: Secondary School Leaving Certificate
-      university: Vikas Vidyalaya Matric Higher Secondary School, Tirupur
-      time: 2008
-      details: |
-        Percent: 92%
-
-footer: >
-    Designed with <i class="fas fa-heart"></i> by <a href="http://themes.3rdwavemedia.com" target="_blank" rel="nofollow">Xiaoying Riley</a>
