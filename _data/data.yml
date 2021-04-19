@@ -19,9 +19,9 @@ sidebar:
     github: arvindh93
     gitlab:
     bitbucket:
-    twitter: ''
-    stack-overflow: # Number/Username, e.g. 123456/alandoe
-    codewars:
+    twitter:
+    stack-overflow: 7966173/aravind-s, e.g. 123456/alandoe
+    codewars: arvindh_s
     goodreads: # Number-Username, e.g. 123456-alandoe
 
     languages:
@@ -98,20 +98,17 @@ education:
     - degree: Bachelor of Engineering
       university: College of Engineering, Guindy
       time: 2010 - 2014
-      details: |
-        CGPA: 8.47
+      details: CGPA - 8.47
       
     - degree: Higher Secondary
       university: Kurinji Higher Secondary School, Namakkal
       time: 2010
-      details: |
-        Percent: 98%
+      details: Percent - 98%
      
     - degree: Secondary School Leaving Certificate
       university: Vikas Vidyalaya Matric Higher Secondary School, Tirupur
       time: 2008
-      details: |
-        Percent: 92%
+      details: Percent - 92%
 
 skills:
     title: Skills &amp; Proficiency
@@ -133,4 +130,4 @@ skills:
         level: 80%
 
       - name: NodeJS | MongoDB | Mocha
-        level: 540%
+        level: 54%
