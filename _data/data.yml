@@ -20,7 +20,7 @@ sidebar:
     gitlab:
     bitbucket:
     twitter:
-    stack-overflow: 7966173/aravind-s, e.g. 123456/alandoe
+    stack-overflow: 7966173/aravind-s
     codewars: arvindh_s
     goodreads: # Number-Username, e.g. 123456-alandoe
 
@@ -114,20 +114,20 @@ skills:
     title: Skills &amp; Proficiency
 
     toolset:
-      - name: Python | PHP
+      - name: 'Python | PHP'
         level: 90%
 
-      - name: Flask | Cakephp | Codeignitor
+      - name: 'Flask | Cakephp | Codeignitor'
         level: 90%
 
-      - name: Pytest | PHPUnit
+      - name: 'Pytest | PHPUnit'
         level: 90%
 
-      - name: PostgreSQL | MySQL
+      - name: 'PostgreSQL | MySQL'
         level: 90%
 
-      - name: Ember | HTML | CSS | JS
+      - name: 'Ember | HTML | CSS | JS'
         level: 80%
 
-      - name: NodeJS | MongoDB | Mocha
+      - name: 'NodeJS | MongoDB | Mocha'
         level: 54%
