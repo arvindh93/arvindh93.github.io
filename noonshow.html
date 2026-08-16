@@ -1,0 +1,190 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Noonshow — the technical architecture behind an AI-powered movie discovery product built by Aravind Seshadri.">
+  <title>Noonshow — Technical Architecture | Aravind Seshadri</title>
+  <link rel="icon" href="favicon.ico">
+  <link rel="stylesheet" href="styles.css">
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-3Q4CR596EF"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-3Q4CR596EF');
+  </script>
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="index.html">Aravind Seshadri</a>
+    <nav><a href="index.html#work">Work</a><a href="index.html#about">About</a><a href="https://drive.google.com/file/d/1j1C3SpIoaXMAge5o1Tl4dI7FZAGSlMGX/view?usp=sharing" target="_blank" rel="noreferrer">Resume ↗</a><a href="index.html#contact">Contact</a></nav>
+  </header>
+
+  <main>
+    <section class="case-hero">
+      <p class="eyebrow">CASE STUDY / AI PRODUCT</p>
+      <h1>Noonshow</h1>
+      <p class="case-lede">A high-performance, phonetic-aware semantic search engine for movie discovery.</p>
+      <div class="actions">
+        <a class="button button-dark" href="https://noonshow.io" target="_blank" rel="noreferrer">Visit Noonshow ↗</a>
+        <a class="button button-light" href="index.html">Back to portfolio</a>
+      </div>
+    </section>
+
+    <section class="architecture-section" aria-labelledby="architecture-title">
+      <h2 id="architecture-title">System architecture</h2>
+      <figure class="architecture-figure">
+        <img src="noonshow_arch.png" alt="Noonshow high-level system architecture: API gateway, NLP and phonetic entity handling, vector retrieval and reranking, result enrichment, cache, and telemetry.">
+        <figcaption>Natural-language requests flow through intent parsing, staged retrieval, enrichment and feedback instrumentation.</figcaption>
+      </figure>
+    </section>
+
+    <section class="case-grid">
+      <div class="case-main">
+        <h2 id="overview">Executive summary</h2>
+        <p>
+          Searching Indian cinema is challenging when people remember plot details
+          rather than titles, or spell artist names phonetically in several different
+          ways. Noonshow is designed as an intelligent, multi-stage hybrid search
+          engine that returns relevant results quickly while handling both cases.
+        </p>
+        <p>
+          The backend combines an asynchronous FastAPI gateway, dense-vector search,
+          cross-encoder reranking, Redis caching, spaCy NLP and live progress
+          streaming. Each responsibility is kept in a decoupled module so the
+          service can remain responsive while performing heavier ML work.
+        </p>
+
+        <h2 id="understanding">Dual-track query understanding</h2>
+        <p>
+          A query such as “movies directed by Mani Ratnam with A.R. Rahman music set
+          in the 90s” contains metadata filters and semantic context. The NLP layer
+          separates technical anchors such as director, music and cast from the plot
+          description. A custom phonetic resolver maps spelling variants of Indian
+          cinema names to canonical entities, allowing those resolved IDs to become
+          precise metadata filters before vector retrieval.
+        </p>
+
+        <div class="callout">
+          <strong>Example query decomposition</strong>
+          <p><span class="mono">“Kamal Haasan movie where hero acts as an old grandmother”</span><br>Technical intent: actor = Kamal Haasan. Plot intent: hero acts as an old grandmother.</p>
+        </div>
+
+        <h2 id="retrieval">Multi-stage retrieval and reranking</h2>
+        <p>
+          Dense embeddings provide broad recall over movie plots and synopses, while
+          metadata constraints reduce the candidate pool. The highest-ranked
+          candidates are then sent to an isolated cross-encoder reranking service,
+          which scores complete query-document pairs for sharper semantic precision.
+          A score floor removes weak matches; an asyncio semaphore throttles
+          concurrency to protect the embedding workers under load.
+        </p>
+
+        <h2 id="experience">Streaming, enrichment and trending</h2>
+        <p>
+          Server-Sent Events stream search stages to the client as they happen—query
+          parsing, retrieval, reranking, enrichment and completion—so the experience
+          feels responsive rather than waiting on one final payload. Redis caches
+          external movie metadata for seven days, while an asynchronous fetcher
+          enriches results on cache misses and local SQLite data provides a fallback.
+        </p>
+        <p>
+          Trending results use interaction-weighted, four-hour Redis buckets with
+          exponential decay over a 24-hour window. Recent clicks carry more weight
+          than impressions, and curated classics keep the UI useful when traffic is
+          sparse.
+        </p>
+        <div class="table-wrap">
+          <table class="architecture-table event-table">
+            <caption>Server-Sent Event stages</caption>
+            <thead><tr><th>Event</th><th>What the user sees</th></tr></thead>
+            <tbody>
+              <tr><td><code>searching</code></td><td>Query parsing and vector lookup begin.</td></tr>
+              <tr><td><code>processing</code></td><td>Candidates are being re-scored by the reranker.</td></tr>
+              <tr><td><code>final touchup</code></td><td>Posters and metadata are being enriched.</td></tr>
+              <tr><td><code>complete</code></td><td>The final result set is ready to render.</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="observability">Feedback and observability</h2>
+        <p>
+          Each search receives a unique identifier, linking user feedback to the
+          result set that produced it and creating a useful dataset for evaluating
+          and improving ranking. Prometheus latency histograms, OpenTelemetry traces
+          and structured logs provide visibility across embedding, retrieval,
+          reranking and metadata-fetch stages.
+        </p>
+
+        <h2 id="stack">Architecture summary</h2>
+        <div class="table-wrap">
+          <table class="architecture-table">
+            <thead><tr><th>Component</th><th>Technology</th><th>Role</th></tr></thead>
+            <tbody>
+              <tr><td>API gateway</td><td>FastAPI, async Python</td><td>Search API and SSE progress streaming</td></tr>
+              <tr><td>Vector search</td><td>ChromaDB + bge-m3 embeddings</td><td>High-recall movie plot retrieval</td></tr>
+              <tr><td>Reranking</td><td>Cross-encoder service</td><td>Deep semantic re-scoring of candidates</td></tr>
+              <tr><td>NLP and phonetics</td><td>spaCy + Soundex / Double Metaphone</td><td>Intent extraction and canonical name resolution</td></tr>
+              <tr><td>Cache and trending</td><td>Redis</td><td>Metadata caching and time-decayed trends</td></tr>
+              <tr><td>Relational data</td><td>SQLite</td><td>Entity mapping, attributes and search feedback</td></tr>
+              <tr><td>Telemetry</td><td>OpenTelemetry, Prometheus and Loki</td><td>Tracing, metrics and structured logging</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="lessons">Engineering lessons</h2>
+        <ul class="case-list">
+          <li>Isolating the reranker keeps ML compute spikes from blocking the API event loop.</li>
+          <li>Streaming progress improves perceived responsiveness, even for short searches.</li>
+          <li>Domain-specific phonetics materially improve metadata precision in regional datasets.</li>
+          <li>Long-lived metadata caching reduces dependency on third-party APIs and network latency.</li>
+        </ul>
+
+        <h2 id="next">What’s next</h2>
+        <p>
+          The next areas of exploration are hybrid sparse-dense retrieval—combining
+          BM25 keyword scoring with dense vectors—and using attributed user feedback
+          to evaluate and refine reranker performance over time.
+        </p>
+      </div>
+
+      <aside class="case-side">
+        <nav class="case-toc" aria-label="Case study sections">
+          <span>ON THIS PAGE</span>
+          <a href="#overview">Overview</a>
+          <a href="#understanding">Query understanding</a>
+          <a href="#retrieval">Retrieval &amp; reranking</a>
+          <a href="#experience">User experience</a>
+          <a href="#observability">Observability</a>
+          <a href="#stack">Technology stack</a>
+          <a href="#lessons">Lessons</a>
+        </nav>
+        <div class="side-card lime">
+          <span>PRODUCT</span>
+          <strong>AI-powered<br>movie discovery</strong>
+        </div>
+        <div class="side-card">
+          <span>STATUS</span>
+          <strong>Live</strong>
+          <a href="https://noonshow.io" target="_blank" rel="noreferrer">noonshow.io ↗</a>
+        </div>
+        <div class="side-card yellow">
+          <span>INTERFACE</span>
+          <strong>Web + Telegram</strong>
+        </div>
+        <div class="side-card">
+          <span>SOURCE</span>
+          <strong>Production repository is private.</strong>
+        </div>
+      </aside>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <span>© <span id="year"></span> Aravind Seshadri</span>
+    <span><a href="index.html">Back to portfolio ↗</a></span>
+  </footer>
+  <script src="script.js"></script>
+</body>
+</html>
