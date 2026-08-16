@@ -66,8 +66,8 @@ h1,h2,h3,p{margin-top:0}
 .case-grid{max-width:var(--max);margin:auto;padding:80px 64px 120px;display:grid;grid-template-columns:minmax(0,2fr) 310px;gap:70px}
 .case-main h2{font-size:32px;letter-spacing:-.05em;margin:48px 0 18px}.case-main h2:first-child{margin-top:0}.case-main p{color:#505050;font-size:17px}
 .architecture-figure{margin:0;border:1px solid #000;background:var(--soft);padding:16px}.architecture-figure img{display:block;width:100%;height:auto}.architecture-figure figcaption{margin:12px 4px 2px;color:#606060;font-size:13px}
-.table-wrap{overflow-x:auto;margin:28px 0 45px}.architecture-table{width:100%;border-collapse:collapse;min-width:660px;font-size:14px}.architecture-table th,.architecture-table td{border:1px solid #000;padding:13px;text-align:left;vertical-align:top}.architecture-table th{background:var(--yellow);font-weight:600}.architecture-table td{color:#505050}
-.architecture-table caption{text-align:left;font-size:14px;color:#606060;margin-bottom:10px}.event-table{min-width:510px}.event-table code{font-family:inherit;color:#000}
+.table-wrap{margin:28px 0 45px}.architecture-table{width:100%;border-collapse:collapse;table-layout:fixed;font-size:14px}.architecture-table th,.architecture-table td{border:1px solid #000;padding:13px;text-align:left;vertical-align:top;overflow-wrap:anywhere}.architecture-table th{background:var(--yellow);font-weight:600}.architecture-table td{color:#505050}
+.architecture-table caption{text-align:left;font-size:14px;color:#606060;margin-bottom:10px}
 .diagram{margin:50px 0;padding:28px;border:1px solid #000;background:var(--soft);display:flex;align-items:center;justify-content:center;gap:10px;flex-wrap:wrap}
 .diagram-node{border:1px solid #000;padding:18px 14px;background:#fff;text-align:center;font-size:13px}.diagram-arrow{font-size:22px}
 .callout{margin:40px 0;padding:26px;border:1px solid #000;background:var(--lime)}.callout strong{display:block;margin-bottom:8px}.callout p{margin:0;color:#303030}
@@ -84,4 +84,7 @@ h1,h2,h3,p{margin-top:0}
   .skills-section{padding:65px 24px}.contact-section{padding:85px 24px}
   .site-footer{margin:0;padding:22px 24px;display:block}.site-footer span{display:block;margin:5px 0}
   .case-hero{padding:75px 24px 60px}.architecture-section{padding:45px 24px 0}.architecture-section h2{font-size:28px}.architecture-figure{padding:8px}.case-grid{grid-template-columns:1fr;padding:60px 24px 80px;gap:45px}
+}
+@media(max-width:480px){
+  .table-wrap{overflow-x:auto}.architecture-table{min-width:510px;table-layout:auto}
 }
